@@ -6,7 +6,7 @@ router.post('/user', UserController.create );
 router.get('/user', UserController.getUsers );
 
 //Write code for update and delete
-router.patch('/user', UserController.create );
-router.delete('/user', UserController.create );
+router.patch('/user/:id', UserController.updateUser );
+router.delete('/user/:id', UserController.deleteUser );
 
 module.exports = router;
