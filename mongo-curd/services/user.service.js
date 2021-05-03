@@ -1,5 +1,5 @@
 const DB = require('../utill/db.utill');
-const {ObjectId} = require('mongodb');
+const { ObjectId } = require('mongodb');
 
 class UserServices {
     //Save new user in DB
@@ -10,27 +10,34 @@ class UserServices {
     }
 
     //GET all users
-    //Save new user in DB
     static async getAll() {
         const db = await DB.getCon();
-        const result = await db.find({}).toArray();;
+        const result = await db.find({
+            isDeleted: false
+        }).toArray();;
         return result;
     }
 
-    static async updateUser(id,value){
-        console.log(id)
-        console.log(value)
+    static async updateUser(id, value) {
         const db = await DB.getCon();
-        const result = await db.updateOne({ _id:ObjectId(id)},{$set: 
-            value,
+        const result = await db.updateOne({ _id: ObjectId(id) }, {
+            $set:
+                value,
         });
         return result;
 
     }
 
-    static async deleteUser(id){
+    static async deleteUser(id) {
         const db = await DB.getCon();
-        const result = await db.deleteOne({_id:ObjectId(id)});
+        const result = await db.updateOne(
+            {
+                _id: ObjectId(id)
+            }, {
+            $set: {
+                isDeleted: true
+            }
+        });
         return result;
 
     }

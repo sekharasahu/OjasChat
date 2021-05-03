@@ -10,7 +10,8 @@ class User {
         this.name = name;
         this.age = age,
         this.city = city,
-        this.phone = phone
+        this.phone = phone,
+        this.isDeleted = false
     }
 }
 
@@ -34,18 +35,17 @@ class UserController {
         res.send(result);
     }
 
+    //Update user
     static async updateUser(req,res){
-        // console.log(req.params)
-        // console.log(req.body)
         const result = await UserServices.updateUser(req.params.id,req.body);
         res.send(result);
 
     }
 
+    //Soft delete user
     static async deleteUser(req,res){
         const result = await UserServices.deleteUser(req.params.id)
         res.send(result);
-
     }
 }
 
