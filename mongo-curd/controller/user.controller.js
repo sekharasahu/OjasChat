@@ -26,7 +26,7 @@ class UserController {
             req.body.phone,
         );
         const result = await UserServices.save(newUser);
-        res.send(result);
+        res.status(201).send(result);
     }
 
     //GET all the users
@@ -46,6 +46,11 @@ class UserController {
     static async deleteUser(req,res){
         const result = await UserServices.deleteUser(req.params.id)
         res.send(result);
+    }
+
+    //Method to addition
+    static add(num1, num2) {
+        return num1 + num2;
     }
 }
 
