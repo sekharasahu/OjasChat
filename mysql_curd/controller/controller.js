@@ -30,10 +30,28 @@ class Emp {
         }
     }
 
-    static async updateUser () {
+    static async updateUser (req,res) {
+        try {
+            let result = await EmpService.updateuser(req.body.id,req.body.name,req.body.address,req.body.phone,req.body.age,);
+            console.log(result);
+            res.status(200).send({
+                message:"user is updated"
+            });
+        } catch (err) {
+            console.log(err);
+        }
 
     }
-    static async deletUser () {
+    static async deletUser (req,res) {
+        try {
+            let result = await EmpService.deleteUser(req.body.id);
+            console.log(result);
+            res.status(200).send({
+                message:"user is delted"
+            });
+        } catch (err) {
+            console.log(err);
+        }
 
     }
     
