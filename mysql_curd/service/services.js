@@ -29,7 +29,38 @@ class EmpService {
         } catch (err) {
             console.log(err);
         }
+    }
+    static async updateuser(id,name,address,phone,age) {   
+        try {
+            let conn = await Db.getConn();
+            let sql = SqlString.format("UPDATE users SET name=?,address=?, age=?, phone=? WHERE id=?"[
+                name,
+                address,
+                age,
+                phone,
+                id
+            ]);
+               
+            let result = await conn.query(sql);
+            return result;
+           
+          
+        } catch (err) {
+            console.log(err);
+        }
 
+    }
+    static async deleteUser(id) {   
+        try {
+            let conn = await Db.getConn();
+            let sql = SqlString.format("DELETE FROM users WHERE id = ?"[
+               id
+            ]);
+            let result = await conn.query(sql);
+            return result;
+        } catch (err) {
+            console.log(err);
+        }
     }
 }
 
